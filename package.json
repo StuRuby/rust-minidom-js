@@ -1,5 +1,5 @@
 {
-  "name": "@napi-rs/package-template",
+  "name": "@ali/rust-minify-xml",
   "version": "1.0.0",
   "description": "Template project for writing node package with napi-rs",
   "main": "index.js",
@@ -18,7 +18,7 @@
     "index.js"
   ],
   "napi": {
-    "name": "package-template",
+    "name": "rust-minify-xml",
     "triples": {
       "defaults": true,
       "additional": [
@@ -43,18 +43,10 @@
     "access": "public"
   },
   "scripts": {
-    "artifacts": "napi artifacts",
-    "bench": "node -r @swc-node/register benchmark/bench.ts",
-    "build": "napi build --platform --release --pipe \"prettier -w\"",
-    "build:debug": "napi build --platform --pipe \"prettier -w\"",
-    "format": "run-p format:prettier format:rs format:toml",
-    "format:prettier": "prettier . -w",
-    "format:toml": "taplo format",
-    "format:rs": "cargo fmt",
-    "lint": "eslint . -c ./.eslintrc.yml",
-    "prepublishOnly": "napi prepublish -t npm",
-    "test": "ava",
-    "version": "napi version"
+    "build": "node ./build.js",
+    "build:apple_arm": "napi build --platform --release --target=aarch64-apple-darwin",
+    "build:apple_x64": "napi build --platform --release --target=x86_64-apple-darwin",
+    "build:linux_x64_gnu": "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-unknown-linux-gnu-gcc napi build --platform --release --target=x86_64-unknown-linux-gnu"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.14.6",
@@ -107,5 +99,20 @@
     "singleQuote": true,
     "arrowParens": "always"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.4.1",
+  "optionalDependencies": {
+    "@ali/rust-minify-xml-win32-x64-msvc": "1.0.0",
+    "@ali/rust-minify-xml-darwin-x64": "1.0.0",
+    "@ali/rust-minify-xml-linux-x64-gnu": "1.0.0",
+    "@ali/rust-minify-xml-linux-x64-musl": "1.0.0",
+    "@ali/rust-minify-xml-linux-arm64-gnu": "1.0.0",
+    "@ali/rust-minify-xml-win32-ia32-msvc": "1.0.0",
+    "@ali/rust-minify-xml-linux-arm-gnueabihf": "1.0.0",
+    "@ali/rust-minify-xml-darwin-arm64": "1.0.0",
+    "@ali/rust-minify-xml-android-arm64": "1.0.0",
+    "@ali/rust-minify-xml-freebsd-x64": "1.0.0",
+    "@ali/rust-minify-xml-linux-arm64-musl": "1.0.0",
+    "@ali/rust-minify-xml-win32-arm64-msvc": "1.0.0",
+    "@ali/rust-minify-xml-android-arm-eabi": "1.0.0"
+  }
 }
